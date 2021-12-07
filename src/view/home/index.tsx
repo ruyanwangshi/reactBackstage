@@ -1,8 +1,19 @@
 import React, { memo } from 'react'
+import MDEditor from '@uiw/react-md-editor';
+
 
 function Home() {
+    const [value, setValue] = React.useState("**Hello world!!!**");
+    function test(val:any) {
+        console.log(val)
+        setValue(val)
+    }
     return (<div>
-        我是home页
+        <MDEditor
+        value={value}
+        onChange={test}
+      />
+      <MDEditor.Markdown source={value} />
     </div>)
 }
 

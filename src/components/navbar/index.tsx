@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const NavBar = (props: any) => {
+const NavBar = () => {
   const [test, setTest] = useState('测试')
   const navigate = useNavigate()
   const testcallback = useCallback(
