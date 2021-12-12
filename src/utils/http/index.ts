@@ -1,6 +1,7 @@
 import Axios from 'axios'
 
-const baseUrl = 'http://192.168.144.210:3001'
+// const baseUrl = 'http://192.168.144.210:3001'
+const baseUrl = 'http://192.168.31.12:3001'
 
 const axios = Axios.create({
   timeout: 5000,
