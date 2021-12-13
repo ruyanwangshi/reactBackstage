@@ -1,5 +1,5 @@
 import Home from '@/view/home'
-import About from '@/view/about'
+import Information from '@/view/Information'
 import React, { memo } from 'react'
 import { useRoutes } from 'react-router-dom'
 
@@ -10,8 +10,8 @@ function Routes() {
       element: <Home />,
     },
     {
-      path: '/about',
-      element: <About />,
+      path: '/information',
+      element: <Information />,
     },
   ]
   return useRoutes(routes)

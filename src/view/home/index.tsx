@@ -2,12 +2,14 @@ import React, { memo, useState, ChangeEvent } from 'react'
 import MDEditor from '@uiw/react-md-editor'
 import HeaderForm from './components/HeaderForm'
 import { HomeContainer } from './homeStyle'
+import { Modal } from 'antd'
 import request from '@/utils/http'
 
 function Home() {
   const [mdFile, setValue] = useState<string>('**Hello world!!!**')
   const [fileName, setfileName] = useState<string>('')
   const [typeName, settypeName] = useState<string>('')
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
 
   // 文章名称输入事件
   function changeFileName(e: ChangeEvent<HTMLInputElement>) {
@@ -21,9 +23,17 @@ function Home() {
     settypeName(value)
   }
 
-  function test(val: any) {
-    console.log(val)
-    setValue(val)
+  function mdChange(val?: string) {
+    const mdtext: string = val || ''
+    setValue(mdtext)
+  }
+
+  function handleOk() {
+    setIsModalVisible(true)
+  }
+
+  function handleCancel() {
+    setIsModalVisible(false)
   }
 
   function subBtn() {
@@ -40,7 +50,7 @@ function Home() {
     <HomeContainer>
       <div className="md-container">
         <HeaderForm fileName={fileName} changeFileName={changeFileName} typeName={typeName} changeTypeName={changeTypeName}/>
-        <MDEditor value={mdFile} onChange={test} />
+        <MDEditor value={mdFile} onChange={mdChange} />
         {/* <MDEditor.Markdown source={mdFile} /> */}
       </div>
       <div className="save-container">
@@ -48,6 +58,7 @@ function Home() {
           保存
         </div>
       </div>
+      <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}/>
     </HomeContainer>
   )
 }
