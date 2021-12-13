@@ -3,18 +3,30 @@ import { useNavigate } from 'react-router-dom'
 import { NavBarContianer } from './navbarStyle'
 
 const NavBar = () => {
-  const [test, setTest] = useState('测试')
+  const [navBarList, setTest] = useState([
+    {
+      name: '首页',
+      path: '/'
+    },
+    {
+      name: '所有文档信息',
+      path: '/information'
+    }
+  ])
   const navigate = useNavigate()
   const testcallback = useCallback(
     (url) => {
       navigate(url)
     },
-    [test]
+    [navBarList]
   )
   return (
     <NavBarContianer>
-      <div onClick={() => testcallback('/')}>首页</div>
-      <div onClick={() => testcallback('/about')}>关于</div>
+      {
+        navBarList.map((item, index) => (
+          <div className='navbar-item' key={index} onClick={() => testcallback(item.path)}>{item.name}</div>
+        ))
+      }
     </NavBarContianer>
   )
 }
