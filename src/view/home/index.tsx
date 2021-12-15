@@ -10,16 +10,17 @@ function Home() {
   const [fileName, setfileName] = useState<string>('')
   const [typeName, settypeName] = useState<string>('')
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
+  const [modalEl] = useState(document.getElementById('home-content') || '')
 
   // 文章名称输入事件
   function changeFileName(e: ChangeEvent<HTMLInputElement>) {
-    const value:string = e.target.value
+    const value: string = e.target.value
     setfileName(value)
   }
 
-   // 文章分类
-   function changeTypeName(e: ChangeEvent<HTMLInputElement>) {
-    const value:string = e.target.value
+  // 文章分类
+  function changeTypeName(e: ChangeEvent<HTMLInputElement>) {
+    const value: string = e.target.value
     settypeName(value)
   }
 
@@ -28,8 +29,30 @@ function Home() {
     setValue(mdtext)
   }
 
+  function checkRuls(...arg:Array<any>) {
+    for(let i = 0; i< arg.length; i+= 1) {
+      if(!arg[i]) {
+        return true
+      }
+    }
+    return false
+  }
+
   function handleOk() {
-    setIsModalVisible(true)
+    setIsModalVisible(false)
+    const data = {
+      mdFile: mdFile,
+      fileName: fileName,
+      typeName: typeName
+    }
+    if(checkRuls(mdFile,fileName,typeName)) {
+
+    }
+    // request.post('/setMdFile', data).then((res) => {
+    //   console.log(res)
+    // }).catch((err) => {
+    //   console.log(err)
+    // })
   }
 
   function handleCancel() {
@@ -37,19 +60,13 @@ function Home() {
   }
 
   function subBtn() {
-    const data = {
-      mdFile: mdFile,
-      fileName: fileName,
-      typeName: typeName
-    }
-    request.post('/setMdFile', data).then((res) => {
-      console.log(res)
-    })
+    
+    setIsModalVisible(true)
   }
   return (
-    <HomeContainer>
+    <HomeContainer id='home-content'>
       <div className="md-container">
-        <HeaderForm fileName={fileName} changeFileName={changeFileName} typeName={typeName} changeTypeName={changeTypeName}/>
+        <HeaderForm fileName={fileName} changeFileName={changeFileName} typeName={typeName} changeTypeName={changeTypeName} />
         <MDEditor value={mdFile} onChange={mdChange} />
         {/* <MDEditor.Markdown source={mdFile} /> */}
       </div>
@@ -58,7 +75,9 @@ function Home() {
           保存
         </div>
       </div>
-      <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}/>
+      <Modal okText={'保存'} cancelText={'取消'} getContainer={modalEl} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <div className='modal-text'>是否保存</div>
+      </Modal>
     </HomeContainer>
   )
 }

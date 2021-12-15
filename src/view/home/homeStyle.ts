@@ -43,6 +43,11 @@ const HomeContainer = styled.div`
     box-shadow: 0 0 0 rgba(0, 0, 0, 0), 0 0 0 rgba(0, 0, 0, 0), inset 5px 5px 10px rgba(121, 130, 160, 0.55), inset -5px -5px 10px rgb(255, 255, 255);
     transition: box-shadow 50ms ease-out;
   }
+
+  .modal-text{
+    width: 100%;
+    text-align: center;
+  }
 `
 
 export { HomeContainer }

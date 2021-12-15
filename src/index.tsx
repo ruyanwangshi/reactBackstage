@@ -4,13 +4,13 @@ import './index.css'
 import App from './App'
 import { HashRouter } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals'
+import 'antd/lib/locale/zh_CN';
+import 'antd/dist/antd.css';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <HashRouter>
-      <App />
-    </HashRouter>
-  </React.StrictMode>,
+  <HashRouter>
+    <App />
+  </HashRouter>,
   document.getElementById('root')
 )
 

@@ -6,7 +6,7 @@ interface NavBarProps {
 }
 
 const NavBar = (props: NavBarProps) => {
-  const [navBarList, setTest] = useState([
+  const [navBarList] = useState([
     {
       name: '首页',
       path: '/',
@@ -21,7 +21,7 @@ const NavBar = (props: NavBarProps) => {
     (url) => {
       navigate(url)
     },
-    [props]
+    [navigate]
   )
   return (
     <NavBarContianer>
