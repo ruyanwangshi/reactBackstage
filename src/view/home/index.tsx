@@ -45,14 +45,14 @@ function Home() {
       fileName: fileName,
       typeName: typeName
     }
-    if(checkRuls(mdFile,fileName,typeName)) {
-
+    if(!checkRuls(mdFile,fileName,typeName)) {
+      request.post('/setMdFile', data).then((res) => {
+      console.log(res)
+    }).catch((err) => {
+      console.log(err)
+    })
     }
-    // request.post('/setMdFile', data).then((res) => {
-    //   console.log(res)
-    // }).catch((err) => {
-    //   console.log(err)
-    // })
+    
   }
 
   function handleCancel() {
