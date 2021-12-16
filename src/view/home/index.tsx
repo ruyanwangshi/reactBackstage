@@ -6,7 +6,7 @@ import { Modal } from 'antd'
 import request from '@/utils/http'
 
 function Home() {
-  const [mdFile, setValue] = useState<string>('**Hello world!!!**')
+  const [mdFile, setValue] = useState<string>('')
   const [fileName, setfileName] = useState<string>('')
   const [typeName, settypeName] = useState<string>('')
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
