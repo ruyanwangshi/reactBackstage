@@ -1,12 +1,13 @@
-import React, { memo, useState, ChangeEvent } from 'react'
+import React, { memo, useState, ChangeEvent, useEffect } from 'react'
 import MDEditor from '@uiw/react-md-editor'
 import HeaderForm from './components/HeaderForm'
 import { HomeContainer } from './homeStyle'
 import { Modal } from 'antd'
 import request from '@/utils/http'
+import { debounceFn } from '@/utils/tools'
 
 function Home() {
-  const [mdFile, setValue] = useState<string>('')
+  const [mdFile, setValue] = useState<string>()
   const [fileName, setfileName] = useState<string>('')
   const [typeName, settypeName] = useState<string>('')
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
@@ -29,9 +30,9 @@ function Home() {
     setValue(mdtext)
   }
 
-  function checkRuls(...arg:Array<any>) {
-    for(let i = 0; i< arg.length; i+= 1) {
-      if(!arg[i]) {
+  function checkRuls(...arg: Array<any>) {
+    for (let i = 0; i < arg.length; i += 1) {
+      if (!arg[i]) {
         return true
       }
     }
@@ -43,16 +44,18 @@ function Home() {
     const data = {
       mdFile: mdFile,
       fileName: fileName,
-      typeName: typeName
+      typeName: typeName,
     }
-    if(!checkRuls(mdFile,fileName,typeName)) {
-      request.post('/setMdFile', data).then((res) => {
-      console.log(res)
-    }).catch((err) => {
-      console.log(err)
-    })
+    if (!checkRuls(mdFile, fileName, typeName)) {
+      request
+        .post('/setMdFile', data)
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
-    
   }
 
   function handleCancel() {
@@ -60,11 +63,23 @@ function Home() {
   }
 
   function subBtn() {
-    
     setIsModalVisible(true)
   }
+
+  function event(e: Event) {
+    console.log(e)
+  }
+
+  const initEvent = debounceFn(event, 1000)
+
+  useEffect(() => {
+    window.addEventListener('mousemove', initEvent)
+    return () => {
+      window.removeEventListener('mousemove', initEvent)
+    }
+  }, [initEvent])
   return (
-    <HomeContainer id='home-content'>
+    <HomeContainer id="home-content">
       <div className="md-container">
         <HeaderForm fileName={fileName} changeFileName={changeFileName} typeName={typeName} changeTypeName={changeTypeName} />
         <MDEditor value={mdFile} onChange={mdChange} />
@@ -76,7 +91,7 @@ function Home() {
         </div>
       </div>
       <Modal okText={'保存'} cancelText={'取消'} getContainer={modalEl} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <div className='modal-text'>是否保存</div>
+        <div className="modal-text">是否保存</div>
       </Modal>
     </HomeContainer>
   )
