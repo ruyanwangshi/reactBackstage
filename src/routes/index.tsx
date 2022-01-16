@@ -1,10 +1,10 @@
 import Home from '@/view/home'
 import Information from '@/view/Information'
 import React, { memo } from 'react'
-import { useRoutes } from 'react-router-dom'
+import { useRoutes, RouteObject } from 'react-router-dom'
 
 function Routes() {
-  const routes = [
+  const routes: RouteObject[] = [
     {
       path: '/',
       element: <Home />,

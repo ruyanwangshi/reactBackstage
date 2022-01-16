@@ -1,21 +1,18 @@
 import styled from 'styled-components'
 
 export const AppContainer = styled.div`
-
-    position: relative;
-    height: auto;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+    position: relative;
+    height: auto;
 
-    .left-menu{
-        width: 10%;
-        height: 100%;
-        background: #001529;
+    .menu-list{
+        flex: 1;
     }
 
-    .right-content{
-        flex: 1;
+    .app-container{
+        flex: 16;
     }
 
 `

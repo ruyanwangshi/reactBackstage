@@ -2,6 +2,7 @@ import React, { memo, useCallback } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { NavBarContianer } from './navbarStyle'
 import { Breadcrumb } from 'antd'
+import {} from 'immutable'
 interface NavBarProps {
   [key: string]: any
 }
@@ -49,11 +50,17 @@ const NavBar = (props: NavBarProps) => {
   return (
     <NavBarContianer>
       <div className={`${CompontentName}container`}>
-        <div className={`${CompontentName}left`}></div>
+        <div className={`${CompontentName}left`}>
+
+        </div>
         <Breadcrumb>{extraBreadcrumbItems}</Breadcrumb>
       </div>
     </NavBarContianer>
   )
 }
 
-export default memo<any>(NavBar)
+export default memo<any>(NavBar, function(prevProps: Readonly<any>, nextProps: Readonly<any>) {
+  console.log(prevProps)
+  console.log(nextProps)
+  return false
+})
