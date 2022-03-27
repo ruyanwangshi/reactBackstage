@@ -11,8 +11,7 @@ const text = `
 `
 
 function Container() {
-
-    initClassList()
+  initClassList()
   function initClassList() {
     request
       .get('/tags', {
@@ -39,7 +38,6 @@ function Container() {
           <p>{text}</p>
         </Panel>
       </Collapse>
-      ,
     </div>
   )
 }
